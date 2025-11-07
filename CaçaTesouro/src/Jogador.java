@@ -48,11 +48,15 @@ public class Jogador {
     return this.jogadasFeitas.contains(coordenada);
   }
 
-  public void 
-
   public void atacar(int linha, int coluna){
-    if(ja jaJogou(linha, coluna)){
-      System.out.println("Erro: Voce ja posicionou um tesouro ai. Tente outra posicao");
+    if(jaJogou(linha, coluna)){
+      System.out.println("Erro: Voce ja procurou um tesouro ai. Tente outra posicao");
+    }else{ 
+      registrarTentativa(linha, coluna);
     }
+  }
+
+  public void registrarTentativa(){
+    
   }
 }
