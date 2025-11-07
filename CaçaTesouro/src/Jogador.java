@@ -56,7 +56,15 @@ public class Jogador {
     }
   }
 
-  public void registrarTentativa(){
+  public void registrarTentativa(int linha, int coluna){
+    
+  }
+
+  public int receberAtaque(int linha, int coluna){
+    
+  }
+  
+  public void adicionarPontos(int pontuacao){
     
   }
 }
