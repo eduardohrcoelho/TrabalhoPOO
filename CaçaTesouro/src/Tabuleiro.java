@@ -11,6 +11,11 @@ public class Tabuleiro {
 
     }
     
-    
+    public boolean posicaoLivre(int linha, int coluna){
+        if(mapaTesouros[linha][coluna] != null){
+            return false;
+        }
+        return true;
+    }
 
 }
