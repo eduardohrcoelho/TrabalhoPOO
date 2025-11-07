@@ -7,8 +7,15 @@ public class Tabuleiro {
         mapaTesouros = new Tesouro[10][10];
     }
 
-    public void posicionarTesouro(int linha, int coluna, Tesouro t){
-
+    public boolean posicionarTesouro(int linha, int coluna, Tesouro t){
+        if(!(linha >= 0 && linha <= 10 && coluna >=0 && coluna <= 10)){
+            System.out.println("Posição inválida!");
+        }
+        if(posicaoLivre(linha, coluna)){
+            mapaTesouros[linha][coluna] = t;
+            return true;
+        }
+        return false;
     }
     
     public boolean posicaoLivre(int linha, int coluna){
