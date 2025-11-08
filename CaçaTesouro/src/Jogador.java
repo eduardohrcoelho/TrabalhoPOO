@@ -1,21 +1,21 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Jogador {
-  protected String nome;
-  protected int pontuacao;
-  protected Tabuleiro meuTabuleiro;
+  private String nome;
+  private double pontuacao;
+  private Tabuleiro meuTabuleiro;
 
   private ArrayList<String> jogadasFeitas;
 
   public Jogador() {
   }
 
-  public Jogador(String nome, int pontuacao, Tabuleiro meuTabuleiro) {
+  public Jogador(String nome) {   
     this.nome = nome;
-    this. pontuacao = 0;
-    this.meuTabuleiro = new Tabuleiro();
+    this.pontuacao = 0.0;
+    this.meuTabuleiro = new Tabuleiro();      
 
-    this.jogadasFeitas = new ArrayList<String>();
+    this.jogadasFeitas = new ArrayList<String>(); // Cria a lista de jogadas vazia
   }
 
   public void setNome(String nome) {
@@ -34,37 +34,67 @@ public class Jogador {
     return this.pontuacao;
   }
 
-  public void getTabuleiro(Tabuleiro meuTabuleiro) {
+  public void setMeuTabuleiro(Tabuleiro meuTabuleiro) {
     this.meuTabuleiro = meuTabuleiro;
   }
 
-  public Tabuleiro setTabuleiro() {
+  public Tabuleiro getMeuTabuleiro() {
     return this.meuTabuleiro;
   }
 
-  // Coloca tesouros no tabuleiro
+  public int receberAtaque(int linha, int coluna) {
+    Tesouro tesouroAlvo = this.meuTabuleiro.verificarPosicao(linha, coluna);
+    
+    if(tesouroAlvo != null) {
+      double pontosGanhos = tesouroAlvo.getPontos();
+
+      this.meuTabuleiro.removerTesouro(linha, coluna);
+
+      return pontosGanhos;
+    }else{
+      return 0.0;
+    }
+  }
+
   public boolean jaJogou(int linha, int coluna) {
     String coordenada = linha + "," + coluna;
     return this.jogadasFeitas.contains(coordenada);
   }
 
-  public void atacar(int linha, int coluna){
-    if(jaJogou(linha, coluna)){
-      System.out.println("Erro: Voce ja procurou um tesouro ai. Tente outra posicao");
-    }else{ 
-      registrarTentativa(linha, coluna);
+  public void registrarTentativa(int linha, int coluna) {
+    String coordenada = linha + "," + coluna;
+    this.jogadasFeitas.add(coordenada);
+  }
+
+  public void posicionarTesouro(){
+    System.out.println("---" + this.nome + ", posicione seus tesouros! ---");
+    Scanner entrada = new Scanner(System.in);
+
+    for(int i = 0; i <3; i++){
+      System.out.println("Posicione seu Tesouro VERDE(" + (i+1) + "/3):");
+    }
+
+    System.out.println(this.nome + " terminou de posicionar!");
+  }
+
+  public boolean posicionarTesouro(int linha, int coluna){
+    return this.posicionarTesouro(linha, coluna, "Amarelo");
+  }
+
+  public boolean posicionarTesouro(int linha, int coluna, String cor){
+    if (this.meuTabuleiro.isPosicaoLivre(linha, coluna)){
+      Tesouro novoTesouro = new Tesouro(cor);
+
+      this.meuTabuleiro.adicionarTesouro(novoTesouro, linha, coluna);
+
+      return true;
+    }else {
+      System.out.println("Erro: Posição(" + linha + "," + coluna + ") já está ocupada!");
+      return false;
     }
   }
 
-  public void registrarTentativa(int linha, int coluna){
-    
-  }
-
-  public int receberAtaque(int linha, int coluna){
-    
-  }
-  
-  public void adicionarPontos(int pontuacao){
-    
+  public void adicionarPontos(double pontosGanhos) {
+    this.pontuacao = this.pontuacao + pontosGanhos;
   }
 }
