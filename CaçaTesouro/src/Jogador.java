@@ -73,7 +73,7 @@ public class Jogador {
     return sucesso;
   }
 
-  public boolean posicionarTesouro(Scanner entrada) {
+  public void posicionarTesouro(Scanner entrada) {
     System.out.println("---" + this.nome + ", posicione seus tesouros! ---");
     System.out.println("(O tabuleiro é 10x1, use linha e colunas de 0 a 9)");
     
@@ -83,8 +83,6 @@ public class Jogador {
     loopPosicionamento("vermelho", 2, entrada);
 
     System.out.println("---" + this.nome + " terminou de posicionar! ---");
-    return this.posicionarTesouro(linha, coluna, "Amarelo");
-
   }
 
   private void loopPosicionamento(String cor, int quantidade, Scanner entrada) {
@@ -107,11 +105,6 @@ public class Jogador {
 
   public boolean posicionarTesouro(int linha, int coluna) {
     return this.posicionarTesouro(linha, coluna, "Amarelo");
-  }
-
-  public void posicionarTesouro(Scanner entrada) {
-    System.out.println("--- " + this.nome + ", posicione seus tesouros! ---");
-    System.out.println("(O tabuleiro é 10x10, use linhas e colunas de 0 a 9)");
   }
 
   public void adicionarPontos(double pontosGanhos) {
