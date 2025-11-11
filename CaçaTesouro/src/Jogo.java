@@ -87,8 +87,8 @@ public class Jogo {
           if (this.jogoComecou) {
             System.out.println("\n--- Rodada " + this.rodadaAtual + (" ---"));
 
-            executarTurno(jogador1, jogador2); // Jogador 2 procura tesouros do jogador 1
-            executarTurno(jogador2, jogador1); // Jogador 2 procura tesouros do jogador 1
+            executarTurno(); // Jogador 2 procura tesouros do jogador 1
+            executarTurno(); // Jogador 2 procura tesouros do jogador 1
 
             this.rodadaAtual++;
             if (this.rodadaAtual > 10) {

@@ -6,7 +6,9 @@ public class Tabuleiro {
   }
 
   public boolean posicionarTesouro(int linha, int coluna, Tesouro t) {
-    if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) { // Verificação de limite do tabuleiro para evitar que o usuário tente inserir um tesouro em uma posição fora dos limites da matriz.
+    if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) { // Verificação de limite do tabuleiro para evitar
+                                                                     // que o usuário tente inserir um tesouro em uma
+                                                                     // posição fora dos limites da matriz.
       System.out.println("Posição inválida! Linha e coluna deve ser entre 0 e 9.");
       return false;
     }
@@ -30,11 +32,11 @@ public class Tabuleiro {
     String cor;
     for (int i = 0; i < this.mapaTesouros.length; i++) {
       for (int j = 0; j < this.mapaTesouros[i].length; j++) {
-        if(this.mapaTesouros[i][j] == null){
-            System.out.print("~ ");
-        }else{
-            cor = this.mapaTesouros[i][j].getCor();
-            System.out.print(cor + " ");
+        if (this.mapaTesouros[i][j] == null) {
+          System.out.print("~ ");
+        } else {
+          cor = this.mapaTesouros[i][j].getCor();
+          System.out.print(cor + " ");
         }
       }
       System.out.println();

@@ -52,7 +52,7 @@ public class Jogador {
   public double receberAtaque(int linha, int coluna) {
     Tesouro tesouroAlvo = this.meuTabuleiro.verificarPosicao(linha, coluna);
 
-    // Condição para verificar se acertouo tesouro e remove-lo;
+    // Condição para verificar se acertou o tesouro e remove-lo;
     if (tesouroAlvo != null) {
       double pontosGanhos = tesouroAlvo.getPontos();
 
