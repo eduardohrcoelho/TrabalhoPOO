@@ -6,6 +6,7 @@ public class Jogador {
   private Tabuleiro meuTabuleiro;
 
   private ArrayList<String> jogadasFeitas;
+  private char[][] mapaDeTesouros;
 
   public Jogador() {
   }
@@ -16,6 +17,12 @@ public class Jogador {
     this.meuTabuleiro = new Tabuleiro();
 
     this.jogadasFeitas = new ArrayList<String>(); // Cria a lista de jogadas vazia
+    this.mapaDeTesouros = new char[10][10];
+    for (int i = 0; i < 10; i++) {
+      for (int j = 0; j < 10; j++) {
+        this.mapaDeTesouros[i][j] = '~';
+      }
+    }
   }
 
   public void setNome(String nome) {
@@ -68,6 +75,32 @@ public class Jogador {
   public void registrarTentativa(int linha, int coluna) {
     String coordenada = linha + "," + coluna;
     this.jogadasFeitas.add(coordenada);
+  }
+
+  public void registrarResultadoDoAtaque(int linha, int coluna, double pontosGanhos) {
+    if (pontosGanhos > 0) {
+      this.mapaDeTesouros[linha][coluna] = 'X'; // 'X' para ACERTO
+    } else {
+      this.mapaDeTesouros[linha][coluna] = 'O'; // 'O' para ÁGUA/ERRO
+    }
+  }
+
+  public void exibirIlhaTesouros() {
+    System.out.println("--- Ilha de Tesouros de " + this.nome + " ---");
+    System.out.println(" ");
+    for (int j = 0; j < 10; j++) {
+      System.out.println(j + " ");
+    }
+    System.out.println();
+
+    for (int i = 0; i < 10; i++) {
+      System.out.println(i + " ");
+      for (int j = 0; j < 10; j++) {
+        System.out.println(this.mapaDeTesouros[i][j] + " ");
+      }
+      System.out.println();
+    }
+    System.out.println("------------------------");
   }
 
   // Posiciona o tesouro de uma cor especifica

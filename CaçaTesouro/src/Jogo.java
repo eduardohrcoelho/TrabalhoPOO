@@ -7,6 +7,7 @@ public class Jogo {
   private int rodadaAtual;
   private Scanner entradaGlobal;
   private boolean jogoComecou;
+  private Jogador jogadorDaVez;
 
   // Prepara o jogo
   public Jogo() {
@@ -15,6 +16,7 @@ public class Jogo {
     this.jogador2 = new Jogador("Jogador 2");
     this.rodadaAtual = 1;
     this.jogoComecou = false;
+    this.jogadorDaVez = this.jogador1;
   }
 
   // Método principal que faz o jogo funcionar.
@@ -26,6 +28,7 @@ public class Jogo {
     if (this.jogoComecou == false) {
       do {
         System.out.println("\n============ Menu ============");
+        System.out.println("Vez de: " + this.jogadorDaVez.getNome());
         System.out.println("1 - Posicionar tesouros automaticamente");
         System.out.println("5 - Sair do jogo");
         System.out.println("================================");
@@ -39,10 +42,12 @@ public class Jogo {
     } else {
       do {
         System.out.println("\n============ Menu " + this.rodadaAtual + ") ============");
-        System.out.println("2 - Iniciar Rodada (Cavar)");
-        System.out.println("3 - Ver rodadas restantes");
-        System.out.println("4 - Ver placar");
-        System.out.println("5 - Sair do jogo");
+        System.out.println("Vez de: " + this.jogadorDaVez.getNome());
+        System.out.println("2 - Procurar Tesouros");
+        System.out.println("3 - Ver ilha de tesouros");
+        System.out.println("4 - Ver rodadas restantes");
+        System.out.println("5 - Ver placar");
+        System.out.println("6 - Sair do jogo");
         System.out.println("================================");
         resp = this.entradaGlobal.nextInt();
         if (resp >= 2 && resp <= 5) {
@@ -96,18 +101,25 @@ public class Jogo {
           break;
         case 3:
           if (this.jogoComecou) {
+            this.jogadorDaVez.exibirIlhaTesouros();
+          } else {
+            System.out.println("O jogo ainda não comecou");
+          }
+          break;
+        case 4:
+          if (this.jogoComecou) {
             int restantes = 10 - this.rodadaAtual + 1;
             System.out.println("Rodada atual: " + this.rodadaAtual + ". Restam " + restantes + " rodadas.");
           } else {
             System.out.println("O jogo ainda não comecou.");
           }
           break;
-        case 4:
+        case 5:
           System.out.println("--- Placar Atual ---");
           System.out.println(jogador1.getNome() + ": " + jogador1.getPontuacao() + " pontos");
           System.out.println(jogador2.getNome() + ": " + jogador1.getPontuacao() + " pontos");
           break;
-        case 5:
+        case 6:
           System.out.println("Obrigado por jogar");
           jogoAtivo = false;
           break;
@@ -116,34 +128,31 @@ public class Jogo {
   }
 
   // Executa a jogada de um jogador.
-  private void executarTurno(Jogador atacante, Jogador defensor) {
-    System.out.println("Turno de: " + atacante.getNome());
+  private void executarTurno() {
+    Jogador atacante = this.jogadorDaVez;
+    Jogador defensor = (this.jogadorDaVez == this.jogador1) ? this.jogador2 : this.jogador1;
 
-    // Pede as coordenadas da jogada (linha e coluna)
-    System.out.print("Digite a LINHA (0-9) para procurar ");
+    System.out.println("\n--- Turno de: " + atacante.getNome() + " ---");
+
+    System.out.println("Digite a linha (0-9) que voce quer cavar");
     int linha = entradaGlobal.nextInt();
-    System.out.print("Digite a COLUNA (0-9) para procurar ");
+    System.out.println("Digite a coluna (0-9) que voce quer cavar");
     int coluna = entradaGlobal.nextInt();
 
-    // Validar se a jogada é repetida
     if (atacante.jaCavou(linha, coluna)) {
-      System.out.println("Erro! Você já atacou aí. Perdeu o turno.");
-      return;
-    }
-
-    // Se for nova, registra a tentativa
-    atacante.registrarTentativa(linha, coluna);
-
-    // Executa o "ataque"
-    double pontosGanhos = defensor.receberAtaque(linha, coluna);
-
-    // Processa o resultado
-    if (pontosGanhos > 0) {
-      System.out.println("ACERTOU! Ganhou " + pontosGanhos + " pontos!");
-      atacante.adicionarPontos(pontosGanhos);
+      System.out.println("Erro! Você já cavou ai. Perde o turno");
     } else {
-      System.out.println("Nenhum tesouro aí.");
+      atacante.registrarTentativa(linha, coluna);
+      double pontosGanhos = defensor.receberAtaque(linha, coluna);
+      atacante.registrarResultadoDoAtaque(linha, coluna, pontosGanhos);
+      if (pontosGanhos > 0) {
+        System.out.println("Acertou! Ganhou " + pontosGanhos + " pontos!");
+        atacante.adicionarPontos(pontosGanhos);
+      } else {
+        System.out.println("Nenhum tesouro aí.");
+      }
     }
+    this.jogadorDaVez = defensor;
   }
 
   private void declararVencedorPorPontos() {
