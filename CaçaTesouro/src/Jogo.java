@@ -133,6 +133,50 @@ public class Jogo {
     }
   }
 
+  // Gerencia a fase de posicionamento dos dois jogadores
+  private void faseDePosicionamento(){
+    System.out.println("--- FASE DE POSICIONAMENTO: JOGADOR 1 ---");
+    posicionarTesourosJogador(jogador1);
+
+    System.out.println("\n\n--- FASE DE POSICIONAMENTO: JOGADOR 2 ---");
+    posicionarTesourosJogador(jogador2);
+  }
+
+  // Gerencia o loop para um jogador posicionar os 8 tesouros
+  private void posicionarTesourosJogador(Jogador jogador){
+    loopPosiciona(jogador, 3, "verde");
+    loopPosiciona(jogador, 3, "amarelo");
+    loopPosiciona(jogador, 3, "vermelho");
+
+    System.out.println(jogador.getNome() + " terminou de posicionar!");
+  }
+
+  // Loop para posicionar
+  private void loopPosiciona(Jogador jogador, int quant, String cor){
+    int tesourosPosicionados = 0;
+    int linha, coluna;
+    boolean sucesso;
+
+    System.out.println("\n" + jogador.getNome() + ", posicione seus " + quant + " tesouros da cor " + cor);
+
+    while(tesourosPosicionados < quant){
+      System.out.print("Informe a linha (0 - 9): ");
+      linha = entradaGlobal.nextInt();
+      System.out.print("Informe a coluna (0 - 9): ");
+      coluna = entradaGlobal.nextInt();
+
+      sucesso = jogador.posicionarTesouro(linha, coluna, cor);
+
+      if(sucesso){
+        tesourosPosicionados++;
+        System.out.println("Tesouro posicionado!");
+        jogador.getMeuTabuleiro().exibeMapa();
+      }else{
+        System.out.println("Tente novamente.");
+      }
+    }
+  }
+
   // Executa a jogada de um jogador.
   private void executarTurno() {
     Jogador atacante = this.jogadorDaVez;
