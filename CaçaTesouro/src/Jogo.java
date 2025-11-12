@@ -50,10 +50,10 @@ public class Jogo {
         System.out.println("6 - Sair do jogo");
         System.out.println("================================");
         resp = this.entradaGlobal.nextInt();
-        if (resp >= 2 && resp <= 5) {
+        if (resp >= 2 && resp <= 6) {
           entradaValida = true;
         } else {
-          System.out.println("Opcao inválida! Escolha de 2 a 5.");
+          System.out.println("Opcao inválida! Escolha de 2 a 6.");
         }
       } while (!entradaValida);
     }
@@ -74,10 +74,12 @@ public class Jogo {
       switch (opcao) {
         case 1: // Posicionar Tesouros
           if (!this.jogoComecou) {
-            System.out.println("Posicionando tesouros automaticamente.");
+            System.out.println("Escolha uma Linha (0-9) para posicionar");
             int linha = entradaGlobal.nextInt();
+            System.out.println("Escolha uma Coluna (0-9) para posicionar");
             int coluna = entradaGlobal.nextInt();
             entradaGlobal.nextLine();
+            System.out.println("Escolha a cor do Tesouro");
             String cor = entradaGlobal.nextLine();
             jogador1.posicionarTesouro(linha, coluna, cor);
             jogador2.posicionarTesouro(linha, coluna, cor);
@@ -148,12 +150,12 @@ public class Jogo {
     } else {
       atacante.registrarTentativa(linha, coluna);
       Tesouro tesouroAchado = defensor.getMeuTabuleiro().receberAtaque(linha, coluna);
-      if(tesouroAchado != null){
+      if (tesouroAchado != null) {
         double pontosGanhos = tesouroAchado.getPontos();
         atacante.registrarResultadoDoAtaque(linha, coluna, pontosGanhos);
         System.out.println("Acertou! Ganhou " + pontosGanhos + " pontos!");
         atacante.adicionarPontos(pontosGanhos);
-      }else {
+      } else {
         System.out.println("Nenhum tesouro aí.");
       }
     }
