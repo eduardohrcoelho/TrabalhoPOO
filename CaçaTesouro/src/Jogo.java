@@ -29,7 +29,7 @@ public class Jogo {
       do {
         System.out.println("\n============ Menu ============");
         System.out.println("Vez de: " + this.jogadorDaVez.getNome());
-        System.out.println("1 - Posicionar tesouros automaticamente");
+        System.out.println("1 - Posicionar tesouros");
         System.out.println("5 - Sair do jogo");
         System.out.println("================================");
         resp = this.entradaGlobal.nextInt();
@@ -75,8 +75,12 @@ public class Jogo {
         case 1: // Posicionar Tesouros
           if (!this.jogoComecou) {
             System.out.println("Posicionando tesouros automaticamente.");
-            jogador1.posicionarTesouro();
-            jogador2.posicionarTesouro();
+            int linha = entradaGlobal.nextInt();
+            int coluna = entradaGlobal.nextInt();
+            entradaGlobal.nextLine();
+            String cor = entradaGlobal.nextLine();
+            jogador1.posicionarTesouro(linha, coluna, cor);
+            jogador2.posicionarTesouro(linha, coluna, cor);
             System.out.println("Tesouros posicionados! O jogo vai comecar");
             this.jogoComecou = true;
           } else {
@@ -117,7 +121,7 @@ public class Jogo {
         case 5:
           System.out.println("--- Placar Atual ---");
           System.out.println(jogador1.getNome() + ": " + jogador1.getPontuacao() + " pontos");
-          System.out.println(jogador2.getNome() + ": " + jogador1.getPontuacao() + " pontos");
+          System.out.println(jogador2.getNome() + ": " + jogador2.getPontuacao() + " pontos");
           break;
         case 6:
           System.out.println("Obrigado por jogar");

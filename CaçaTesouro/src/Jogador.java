@@ -75,29 +75,34 @@ public class Jogador {
     System.out.println("--- Ilha de Tesouros de " + this.nome + " ---");
     System.out.println(" ");
     for (int j = 0; j < 10; j++) {
-      System.out.println(j + " ");
+      if(j == 0){
+        System.out.print("  ");
+      }
+      System.out.print(j + " ");
     }
     System.out.println();
 
     for (int i = 0; i < 10; i++) {
-      System.out.println(i + " ");
+      System.out.print(i + " ");
       for (int j = 0; j < 10; j++) {
-        System.out.println(this.mapaDeTesouros[i][j] + " ");
+        System.out.print(this.mapaDeTesouros[i][j] + " ");
       }
       System.out.println();
     }
     System.out.println("------------------------");
   }
 
-  // Posiciona o tesouro de uma cor especifica
+  // Posiciona o tesouro de uma cor especifica 
   public boolean posicionarTesouro(int linha, int coluna, String cor) {
     Tesouro novoTesouro = new Tesouro(cor);
 
     boolean sucesso = this.meuTabuleiro.posicionarTesouro(linha, coluna, novoTesouro);
     return sucesso;
   }
-
-  public void posicionarTesouro() {
+  
+  // Posiciona o tesouro automaticamente
+  
+  /*public void posicionarTesouro() {
     System.out.println("---" + this.nome + ", posicione seus tesouros! ---");
     System.out.println("(O tabuleiro é 10x1, use linha e colunas de 0 a 9)");
 
@@ -126,7 +131,7 @@ public class Jogador {
 
   public boolean posicionarTesouro(int linha, int coluna) {
     return this.posicionarTesouro(linha, coluna, "Amarelo");
-  }
+  }*/
 
   public void adicionarPontos(double pontosGanhos) {
     this.pontuacao = this.pontuacao + pontosGanhos;

@@ -6,7 +6,7 @@ public class Tabuleiro {
   }
 
   public boolean posicionarTesouro(int linha, int coluna, Tesouro t) {
-    if (posicaoValida(linha, coluna)) { // Verificação de limite do tabuleiro para evitar
+    if (!posicaoValida(linha, coluna)) { // Verificação de limite do tabuleiro para evitar
                                                                      // que o usuário tente inserir um tesouro em uma
                                                                      // posição fora dos limites da matriz.
       System.out.println("Posição inválida! Linha e coluna deve ser entre 0 e 9.");
