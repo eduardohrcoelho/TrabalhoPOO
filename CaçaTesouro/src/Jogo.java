@@ -74,15 +74,7 @@ public class Jogo {
       switch (opcao) {
         case 1: // Posicionar Tesouros
           if (!this.jogoComecou) {
-            System.out.println("Escolha uma Linha (0-9) para posicionar");
-            int linha = entradaGlobal.nextInt();
-            System.out.println("Escolha uma Coluna (0-9) para posicionar");
-            int coluna = entradaGlobal.nextInt();
-            entradaGlobal.nextLine();
-            System.out.println("Escolha a cor do Tesouro");
-            String cor = entradaGlobal.nextLine();
-            jogador1.posicionarTesouro(linha, coluna, cor);
-            jogador2.posicionarTesouro(linha, coluna, cor);
+            faseDePosicionamento();
             System.out.println("Tesouros posicionados! O jogo vai comecar");
             this.jogoComecou = true;
           } else {
@@ -94,6 +86,7 @@ public class Jogo {
             System.out.println("\n--- Rodada " + this.rodadaAtual + (" ---"));
 
             executarTurno(); // Jogador 1 procura tesouros do jogador 2
+            menu();
             executarTurno(); // Jogador 2 procura tesouros do jogador 1
 
             this.rodadaAtual++;
@@ -146,7 +139,7 @@ public class Jogo {
   private void posicionarTesourosJogador(Jogador jogador){
     loopPosiciona(jogador, 3, "verde");
     loopPosiciona(jogador, 3, "amarelo");
-    loopPosiciona(jogador, 3, "vermelho");
+    loopPosiciona(jogador, 2, "vermelho");
 
     System.out.println(jogador.getNome() + " terminou de posicionar!");
   }
@@ -160,6 +153,7 @@ public class Jogo {
     System.out.println("\n" + jogador.getNome() + ", posicione seus " + quant + " tesouros da cor " + cor);
 
     while(tesourosPosicionados < quant){
+      System.out.println("Posicionando tesouro " + (tesourosPosicionados + 1));
       System.out.print("Informe a linha (0 - 9): ");
       linha = entradaGlobal.nextInt();
       System.out.print("Informe a coluna (0 - 9): ");
@@ -170,7 +164,7 @@ public class Jogo {
       if(sucesso){
         tesourosPosicionados++;
         System.out.println("Tesouro posicionado!");
-        jogador.getMeuTabuleiro().exibeMapa();
+        //jogador.getMeuTabuleiro().exibeMapa();
       }else{
         System.out.println("Tente novamente.");
       }
