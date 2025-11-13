@@ -2,7 +2,7 @@ public class Tabuleiro {
   private Tesouro[][] mapaTesouros;
 
   public Tabuleiro() {
-    mapaTesouros = new Tesouro[10][10];
+    this.mapaTesouros = new Tesouro[10][10];
   }
 
   public boolean posicionarTesouro(int linha, int coluna, Tesouro t) {
@@ -13,7 +13,7 @@ public class Tabuleiro {
       return false;
     }
     if (posicaoLivre(linha, coluna)) {
-      mapaTesouros[linha][coluna] = t;
+      this.mapaTesouros[linha][coluna] = t;
       return true;
     }
     System.out.println("Posiçao já ocupada!");
@@ -21,7 +21,7 @@ public class Tabuleiro {
   }
 
   public boolean posicaoLivre(int linha, int coluna) { // Metódo para verificar se a posição do mapa está livre.
-    if (mapaTesouros[linha][coluna] != null) { // Se linha e coluna informadas forem diferente de null, retorna false
+    if (this.mapaTesouros[linha][coluna] != null) { // Se linha e coluna informadas forem diferente de null, retorna false
                                                // para informar que a posição já está ocupada.
       return false;
     }
@@ -41,8 +41,8 @@ public class Tabuleiro {
     }
     // Condição para verificar se acertou o tesouro e remove-lo;
     if (!posicaoLivre(linha, coluna)) {
-      Tesouro achou = mapaTesouros[linha][coluna];
-      mapaTesouros[linha][coluna] = null;
+      Tesouro achou = this.mapaTesouros[linha][coluna];
+      this.mapaTesouros[linha][coluna] = null;
       return achou;
     }
     return null;
