@@ -88,7 +88,7 @@ public class Jogo {
             executarTurno();
 
             this.rodadaAtual++;
-            if (this.rodadaAtual > 10) {
+            if (this.rodadaAtual > 20) {
               jogoAtivo = false;
               declararVencedorPorPontos();
             }
@@ -105,7 +105,7 @@ public class Jogo {
           break;
         case 4:
           if (this.jogoComecou) {
-            int restantes = 10 - this.rodadaAtual + 1;
+            int restantes = 20 - this.rodadaAtual + 1;
             System.out.println("Rodada atual: " + this.rodadaAtual + ". Restam " + restantes + " rodadas.");
           } else {
             System.out.println("O jogo ainda não comecou.");
@@ -202,7 +202,11 @@ public class Jogo {
   private void declararVencedorPorPontos() {
     if (jogador1.getPontuacao() > jogador2.getPontuacao()) {
       System.out.println("Jogador 1 VENCEU!");
-    } else {
+    } 
+    else if(jogador1.getPontuacao() == jogador2.getPontuacao()){
+      System.out.println("É um empate!");
+    }
+    else {
       System.out.println("Jogador 2 VENCEU");
     }
   }

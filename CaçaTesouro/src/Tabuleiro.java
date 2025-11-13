@@ -9,14 +9,14 @@ public class Tabuleiro {
     if (!posicaoValida(linha, coluna)) { // Verificação de limite do tabuleiro para evitar
                                                                      // que o usuário tente inserir um tesouro em uma
                                                                      // posição fora dos limites da matriz.
-      System.out.println("Posição inválida! Linha e coluna deve ser entre 0 e 9.");
+      System.out.println("Posiçao inválida! Linha e coluna deve ser entre 0 e 9.");
       return false;
     }
     if (posicaoLivre(linha, coluna)) {
       mapaTesouros[linha][coluna] = t;
       return true;
     }
-    System.out.println("Posição já ocupada!");
+    System.out.println("Posiçao já ocupada!");
     return false;
   }
 
