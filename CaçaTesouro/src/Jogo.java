@@ -154,17 +154,17 @@ public class Jogo {
       System.out.println("Posicionando tesouro " + (tesourosPosicionados + 1));
       System.out.print("Informe a linha (0 - 9): ");
       linha = entradaGlobal.nextInt();
-      System.out.print("Informe a coluna (0 - 9): ");
+      System.out.print("--- Informe a coluna (0 - 9): ");
       coluna = entradaGlobal.nextInt();
 
       sucesso = jogador.posicionarTesouro(linha, coluna, cor);
 
       if (sucesso) {
         tesourosPosicionados++;
-        System.out.println("Tesouro posicionado!");
+        System.out.println("--- Tesouro posicionado! ---");
         // jogador.getMeuTabuleiro().exibeMapa();
       } else {
-        System.out.println("Tente novamente.");
+        System.out.println("--- Tente novamente. ---" );
       }
     }
   }
@@ -176,13 +176,13 @@ public class Jogo {
 
     System.out.println("\n--- Turno de: " + atacante.getNome() + " ---");
 
-    System.out.println("Digite a linha (0-9) que voce quer cavar");
+    System.out.println("--- Digite a linha (0-9) que voce quer cavar ---");
     int linha = entradaGlobal.nextInt();
-    System.out.println("Digite a coluna (0-9) que voce quer cavar");
+    System.out.println("--- Digite a coluna (0-9) que voce quer cavar ---");
     int coluna = entradaGlobal.nextInt();
 
     if (atacante.jaCavou(linha, coluna)) {
-      System.out.println("Erro! Você já cavou ai. Perde o turno");
+      System.out.println("--- Erro! Você já cavou ai. Perde o turno --- ");
     } else {
       atacante.registrarTentativa(linha, coluna);
       Tesouro tesouroAchado = defensor.getMeuTabuleiro().receberAtaque(linha, coluna);
@@ -204,7 +204,7 @@ public class Jogo {
       System.out.println("Jogador 1 VENCEU!");
     } 
     else if(jogador1.getPontuacao() == jogador2.getPontuacao()){
-      System.out.println("É um empate!");
+      System.out.println("--- É um empate! ---");
     }
     else {
       System.out.println("Jogador 2 VENCEU");
