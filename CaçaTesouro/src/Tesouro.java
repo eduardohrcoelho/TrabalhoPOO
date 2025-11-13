@@ -5,6 +5,7 @@ public class Tesouro {
   public Tesouro(String cor) {
     this.cor = cor;
 
+  // Atribui pontuação com base na cor.    
     if (this.cor.equalsIgnoreCase("amarelo")) {
       this.pontos = 4.0;
     } else if (this.cor.equalsIgnoreCase("verde")) {

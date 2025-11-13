@@ -25,6 +25,7 @@ public class Jogo {
     int resp = 0;
     boolean entradaValida = false;
 
+    // Menu inicial
     if (this.jogoComecou == false) {
       do {
         System.out.println("\n============ Menu ============");
@@ -39,6 +40,8 @@ public class Jogo {
           System.out.println("Opcao inválida! Escolha 1 ou 5.");
         }
       } while (!entradaValida);
+
+      // Menu após o começo do jogo (Fase de ataque)
     } else {
       do {
         System.out.println("\n============ Menu " + this.rodadaAtual + ") ============");
@@ -60,6 +63,7 @@ public class Jogo {
     return resp;
   }
 
+  // Executa o loop do jogo, chamando o menu
   public void executarPartida() {
     // 1. Menu inicial
     System.out.println("--- BEM-VINDO AO CAÇA AO TESOURO ---");
@@ -68,31 +72,39 @@ public class Jogo {
     // Faz cada jogador colocar os Tesouros
     boolean jogoAtivo = true;
 
+    // Loop principal do jogo
     while (jogoAtivo) {
       int opcao = menu();
 
       switch (opcao) {
-        case 1: // Posicionar Tesouros
+        case 1: // Posiciona Tesouros
           if (!this.jogoComecou) {
-            faseDePosicionamento();
+            faseDePosicionamento(); // Executa o posicionamento dos dois jogadores
             System.out.println("Tesouros posicionados! O jogo vai comecar");
             this.jogoComecou = true;
           } else {
             System.out.println("Opcao inválida (O jogo já comecou)");
           }
           break;
-        case 2: // Iniciar Rodada
+        case 2: // Procura tesouros
           if (this.jogoComecou) {
             System.out.println("\n--- Rodada " + this.rodadaAtual + " ---");
 
             executarTurno();
 
             this.rodadaAtual++;
+
+            // Condição de parada quando atingir 20 rodadas
             if (this.rodadaAtual > 20) {
               jogoAtivo = false;
               declararVencedorPorPontos();
             }
-            if(jogadorDaVez.getPontuacao() == 50.0){
+
+            // Condição de fim de jogo: Quando o jogador atinge a pontuação maxima (50
+            // pontos)
+            // jogadorDaVez já foi trocado no fim do executarTurno(), então verificamos o
+            // jogador que acabou de jogar
+            if (jogadorDaVez.getPontuacao() == 50.0) {
               jogoAtivo = false;
               System.out.println("\n" + jogadorDaVez.getNome() + " achou todos os tesouros!");
               declararVencedorPorPontos();
@@ -101,14 +113,14 @@ public class Jogo {
             System.out.println("Posicione os tesouros primeiro (Opcao 1)!");
           }
           break;
-        case 3:
+        case 3: // Ver ilha de tesouros
           if (this.jogoComecou) {
             this.jogadorDaVez.exibirIlhaTesouros();
           } else {
             System.out.println("O jogo ainda não comecou");
           }
           break;
-        case 4:
+        case 4: // Ver rodadas restantes
           if (this.jogoComecou) {
             int restantes = 20 - this.rodadaAtual + 1;
             System.out.println("Rodada atual: " + this.rodadaAtual + ". Restam " + restantes + " rodadas.");
@@ -116,12 +128,12 @@ public class Jogo {
             System.out.println("O jogo ainda não comecou.");
           }
           break;
-        case 5:
+        case 5: // Ver placar
           System.out.println("--- Placar Atual ---");
           System.out.println(jogador1.getNome() + ": " + jogador1.getPontuacao() + " pontos");
           System.out.println(jogador2.getNome() + ": " + jogador2.getPontuacao() + " pontos");
           break;
-        case 6:
+        case 6: // Sair do jogo
           System.out.println("Obrigado por jogar");
           jogoAtivo = false;
           break;
@@ -130,6 +142,7 @@ public class Jogo {
   }
 
   // Gerencia a fase de posicionamento dos dois jogadores
+  // Chama o metodo de posicionar para o Jogador 1 e depois para o Jogador 2
   private void faseDePosicionamento() {
     System.out.println("--- FASE DE POSICIONAMENTO: JOGADOR 1 ---");
     posicionarTesourosJogador(jogador1);
@@ -147,7 +160,7 @@ public class Jogo {
     System.out.println(jogador.getNome() + " terminou de posicionar!");
   }
 
-  // Loop para posicionar
+  // Loop para posicionar tesouros de uma cor especifica
   private void loopPosiciona(Jogador jogador, int quant, String cor) {
     int tesourosPosicionados = 0;
     int linha, coluna;
@@ -155,6 +168,7 @@ public class Jogo {
 
     System.out.println("\n" + jogador.getNome() + ", posicione seus " + quant + " tesouros da cor " + cor + "!");
 
+    // quantinua pedindo até que 'quant' tesouros sejam posicionados com sucesso
     while (tesourosPosicionados < quant) {
       System.out.println("\n--- Posicionando " + (tesourosPosicionados + 1) + "º tesouro " + cor + " ---\n");
       System.out.print("--- Informe a linha (0 - 9): ");
@@ -165,7 +179,7 @@ public class Jogo {
       sucesso = jogador.posicionarTesouro(linha, coluna, cor);
 
       if (sucesso) {
-        tesourosPosicionados++;
+        tesourosPosicionados++; // incrementa somente se for posicionado corretamente
         System.out.println("\n--- Tesouro posicionado! ---");
       } else {
         System.out.println("\n--- Tente novamente. ---\n");
@@ -173,8 +187,9 @@ public class Jogo {
     }
   }
 
-  // Executa a jogada de um jogador.
+  // Executa a jogada de um jogador. (Turno de ataque)
   private void executarTurno() {
+    // Define quem ataca e quem defende na rodada
     Jogador atacante = this.jogadorDaVez;
     Jogador defensor = (this.jogadorDaVez == this.jogador1) ? this.jogador2 : this.jogador1;
 
@@ -185,24 +200,31 @@ public class Jogo {
     System.out.println("--- Digite a coluna (0-9) que voce quer cavar ---");
     int coluna = entradaGlobal.nextInt();
 
+    // Verifica se já cavou (atacou) nessa posição
     if (atacante.jaCavou(linha, coluna)) {
       System.out.println("--- Erro! Você já cavou ai. Perde o turno --- ");
     } else {
+      // Registra a nova tentativa
       atacante.registrarTentativa(linha, coluna);
+      // Executa o ataque no tabuleiro do defensor
       Tesouro tesouroAchado = defensor.getMeuTabuleiro().receberAtaque(linha, coluna);
+      // Processa o resultado
       if (tesouroAchado != null) {
         double pontosGanhos = tesouroAchado.getPontos();
-        atacante.registrarResultadoDoAtaque(linha, coluna, pontosGanhos);
+        atacante.registrarResultadoDoAtaque(linha, coluna, pontosGanhos); // Exibe 'X' no tabuleiro de ataque
         System.out.println("Acertou! Ganhou " + pontosGanhos + " pontos!");
         atacante.adicionarPontos(pontosGanhos);
       } else {
-        atacante.registrarResultadoDoAtaque(linha, coluna, 0);
+        atacante.registrarResultadoDoAtaque(linha, coluna, 0); // Exibe 'O' no tabuleiro de ataque
         System.out.println("Nenhum tesouro aí.");
       }
     }
+    // Passa o turno para o outro jogador
     this.jogadorDaVez = defensor;
   }
 
+  // Compara quem tem mais pontos no final do jogo e declara o vencedor ou o
+  // empate
   private void declararVencedorPorPontos() {
     if (jogador1.getPontuacao() > jogador2.getPontuacao()) {
       System.out.println("Jogador 1 VENCEU!");
