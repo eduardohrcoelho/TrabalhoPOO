@@ -212,7 +212,8 @@ public class Jogo {
       if (tesouroAchado != null) {
         double pontosGanhos = tesouroAchado.getPontos();
         atacante.registrarResultadoDoAtaque(linha, coluna, pontosGanhos); // Exibe 'X' no tabuleiro de ataque
-        System.out.println("Acertou um tesouro da cor " + tesouroAchado.getCor() + "! Ganhou " + pontosGanhos + " pontos!");
+        System.out
+            .println("Achou um tesouro da cor " + tesouroAchado.getCor() + "! Ganhou " + pontosGanhos + " pontos!");
         atacante.adicionarPontos(pontosGanhos);
       } else {
         atacante.registrarResultadoDoAtaque(linha, coluna, 0); // Exibe 'O' no tabuleiro de ataque
