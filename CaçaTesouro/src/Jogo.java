@@ -67,7 +67,8 @@ public class Jogo {
   public void executarPartida() {
     // 1. Menu inicial
     System.out.println("--- BEM-VINDO AO CAÇA AO TESOURO ---");
-    System.out.println("Regra: 3 Verdes (6pts), 3 Amarelos (4pts), 2 Vermelhos (10pts)");
+    System.out.println("------ REGRAS ------\n- 3 Verdes (6pts), 3 Amarelos (4pts), 2 Vermelhos (10pts)\n"
+        + "- Os jogadores devem posicionar seus tesouros no tabuleiro\n- Jogadores se alternam para tentar adivinhar a posiçao dos tesouros\n- O jogo termina quando todos os tesouros forem encontrados ou se atingir 20 rodadas (Vence quem tiver maior pontuaçao)\n- Caso os jogadores tenham a mesma pontuaçao no final do jogo, termina em empate");
 
     // Faz cada jogador colocar os Tesouros
     boolean jogoAtivo = true;
@@ -200,7 +201,7 @@ public class Jogo {
     System.out.println("--- Digite a coluna (0-9) que voce quer cavar ---");
     int coluna = entradaGlobal.nextInt();
 
-    while(!Tabuleiro.posicaoValida(linha, coluna)){
+    while (!Tabuleiro.posicaoValida(linha, coluna)) {
       System.out.println("--- Digite a linha (0-9) que voce quer cavar ---");
       linha = entradaGlobal.nextInt();
       System.out.println("--- Digite a coluna (0-9) que voce quer cavar ---");
@@ -231,7 +232,8 @@ public class Jogo {
     this.jogadorDaVez = defensor;
   }
 
-  // Compara quem tem mais pontos no final do jogo e declara o vencedor ou o empate
+  // Compara quem tem mais pontos no final do jogo e declara o vencedor ou o
+  // empate
   private void declararVencedorPorPontos() {
     if (jogador1.getPontuacao() > jogador2.getPontuacao()) {
       System.out.println("Jogador 1 VENCEU!");

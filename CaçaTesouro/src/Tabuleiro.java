@@ -6,9 +6,9 @@ public class Tabuleiro {
   }
 
   public boolean posicionarTesouro(int linha, int coluna, Tesouro t) {
-    if (!posicaoValida(linha, coluna)) { // Verificação de limite do tabuleiro para evitar
+    if (!posicaoValida(linha, coluna)) { // Verificaçao de limite do tabuleiro para evitar
                                                                      // que o usuário tente inserir um tesouro em uma
-                                                                     // posição fora dos limites da matriz.
+                                                                     // posiçao fora dos limites da matriz.
       System.out.println("Posiçao inválida! Linha e coluna deve ser entre 0 e 9.");
       return false;
     }
@@ -20,27 +20,27 @@ public class Tabuleiro {
     return false;
   }
 
-  public boolean posicaoLivre(int linha, int coluna) { // Metódo para verificar se a posição do mapa está livre.
+  public boolean posicaoLivre(int linha, int coluna) { // Metódo para verificar se a posiçao do mapa está livre.
     if (this.mapaTesouros[linha][coluna] != null) { // Se linha e coluna informadas forem diferente de null, retorna false
-                                               // para informar que a posição já está ocupada.
+                                               // para informar que a posiçao já está ocupada.
       return false;
     }
-    return true; // Se não, retorna true e confirma a posição livre para inserir o tesouro.
+    return true; // Se não, retorna true e confirma a posiçao livre para inserir o tesouro.
   }
 
   public static boolean posicaoValida(int linha, int coluna){
     if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) {
-      System.out.println("Posição inválida! Tente novamente números de 0 a 9:\n");
+      System.out.println("Posiçao inválida! Tente novamente números de 0 a 9:\n");
       return false;
     }
     return true;
   }
 
   public Tesouro receberAtaque(int linha, int coluna) {
-    if(!posicaoValida(linha, coluna)){ //Verifica se a posição informada é valida
+    if(!posicaoValida(linha, coluna)){ //Verifica se a posiçao informada é valida
       return null;
     }
-    // Condição para verificar se acertou o tesouro e remove-lo;
+    // Condiçao para verificar se acertou o tesouro e remove-lo;
     if (!posicaoLivre(linha, coluna)) {
       Tesouro achou = this.mapaTesouros[linha][coluna];
       this.mapaTesouros[linha][coluna] = null;
