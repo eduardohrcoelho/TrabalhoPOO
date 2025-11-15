@@ -200,6 +200,13 @@ public class Jogo {
     System.out.println("--- Digite a coluna (0-9) que voce quer cavar ---");
     int coluna = entradaGlobal.nextInt();
 
+    while(!Tabuleiro.posicaoValida(linha, coluna)){
+      System.out.println("--- Digite a linha (0-9) que voce quer cavar ---");
+      linha = entradaGlobal.nextInt();
+      System.out.println("--- Digite a coluna (0-9) que voce quer cavar ---");
+      coluna = entradaGlobal.nextInt();
+    }
+
     // Verifica se já cavou (atacou) nessa posição
     if (atacante.jaCavou(linha, coluna)) {
       System.out.println("--- Erro! Você já cavou ai. Perde o turno --- ");

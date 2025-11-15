@@ -58,17 +58,11 @@ public class Jogador {
   }
 
   // Atualiza o mapa de ataque com o resultado das jogadas
-  public boolean registrarResultadoDoAtaque(int linha, int coluna, double pontosGanhos) {
-     if(!posicaoValida(linha, coluna)){
-      System.out.println("Posiçao inválida! Linha e coluna deve ser entre 0 e 9.");
-      return false;
-    }
+  public void registrarResultadoDoAtaque(int linha, int coluna, double pontosGanhos) {
     if (pontosGanhos > 0) {
       this.mapaDeTesouros[linha][coluna] = 'X'; // 'X' para ACERTO
-      return true;
     } else {
       this.mapaDeTesouros[linha][coluna] = 'O'; // 'O' para ERRO
-      return true;
     }
   }
 

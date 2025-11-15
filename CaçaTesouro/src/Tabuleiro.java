@@ -28,8 +28,9 @@ public class Tabuleiro {
     return true; // Se não, retorna true e confirma a posição livre para inserir o tesouro.
   }
 
-  public boolean posicaoValida(int linha, int coluna){
+  public static boolean posicaoValida(int linha, int coluna){
     if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) {
+      System.out.println("Posição inválida! Tente novamente números de 0 a 9:\n");
       return false;
     }
     return true;
