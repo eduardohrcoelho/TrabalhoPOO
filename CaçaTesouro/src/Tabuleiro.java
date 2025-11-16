@@ -15,7 +15,7 @@ public class Tabuleiro {
       this.mapaTesouros[linha][coluna] = t;
       return true;
     }
-    System.out.println("Posiçao já ocupada!");
+    System.out.println("Posiçao já ocupada! Tente novamente!");
     return false;
   }
 
