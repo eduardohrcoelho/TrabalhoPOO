@@ -7,9 +7,8 @@ public class Tabuleiro {
 
   public boolean posicionarTesouro(int linha, int coluna, Tesouro t) {
     if (!posicaoValida(linha, coluna)) { // Verificaçao de limite do tabuleiro para evitar
-                                                                     // que o usuário tente inserir um tesouro em uma
-                                                                     // posiçao fora dos limites da matriz.
-      System.out.println("Posiçao inválida! Linha e coluna deve ser entre 0 e 9.");
+                                         // que o usuário tente inserir um tesouro em uma
+                                         // posiçao fora dos limites da matriz.
       return false;
     }
     if (posicaoLivre(linha, coluna)) {
@@ -21,23 +20,24 @@ public class Tabuleiro {
   }
 
   public boolean posicaoLivre(int linha, int coluna) { // Metódo para verificar se a posiçao do mapa está livre.
-    if (this.mapaTesouros[linha][coluna] != null) { // Se linha e coluna informadas forem diferente de null, retorna false
-                                               // para informar que a posiçao já está ocupada.
+    if (this.mapaTesouros[linha][coluna] != null) { // Se linha e coluna informadas forem diferente de null, retorna
+                                                    // false
+      // para informar que a posiçao já está ocupada.
       return false;
     }
     return true; // Se não, retorna true e confirma a posiçao livre para inserir o tesouro.
   }
 
-  public static boolean posicaoValida(int linha, int coluna){
+  public static boolean posicaoValida(int linha, int coluna) {
     if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) {
-      System.out.println("Posiçao inválida! Tente novamente números de 0 a 9:\n");
+      System.out.println("\nPosiçao inválida! Tente novamente números de 0 a 9:");
       return false;
     }
     return true;
   }
 
   public Tesouro receberAtaque(int linha, int coluna) {
-    if(!posicaoValida(linha, coluna)){ //Verifica se a posiçao informada é valida
+    if (!posicaoValida(linha, coluna)) { // Verifica se a posiçao informada é valida
       return null;
     }
     // Condiçao para verificar se acertou o tesouro e remove-lo;

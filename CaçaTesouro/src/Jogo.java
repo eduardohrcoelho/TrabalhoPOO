@@ -183,9 +183,7 @@ public class Jogo {
       if (sucesso) {
         tesourosPosicionados++; // incrementa somente se for posicionado corretamente
         System.out.println("\n--- Tesouro posicionado! ---");
-      } else {
-        System.out.println("\n--- Tente novamente. ---\n");
-      }
+      } 
     }
   }
 
