@@ -1,8 +1,8 @@
 public class Tabuleiro {
-  private Tesouro[][] mapaTesouros;
+  private Tesouro[][] mapaTesouros; // Matriz do tipo Tesouro
 
   public Tabuleiro() {
-    this.mapaTesouros = new Tesouro[10][10];
+    this.mapaTesouros = new Tesouro[10][10]; // Cria a matriz
   }
 
   public boolean posicionarTesouro(int linha, int coluna, Tesouro t) {
@@ -11,11 +11,11 @@ public class Tabuleiro {
                                          // posiçao fora dos limites da matriz.
       return false;
     }
-    if (posicaoLivre(linha, coluna)) {
-      this.mapaTesouros[linha][coluna] = t;
+    if (posicaoLivre(linha, coluna)) { // Verificação se a posição não está ocupada.
+      this.mapaTesouros[linha][coluna] = t; // Insere o Tesouro caso a posição esteja livre.
       return true;
     }
-    System.out.println("Posiçao já ocupada! Tente novamente!");
+    System.out.println("Posiçao já ocupada! Tente novamente!"); // Se não, mensagem de erro.
     return false;
   }
 
@@ -29,7 +29,7 @@ public class Tabuleiro {
   }
 
   public static boolean posicaoValida(int linha, int coluna) {
-    if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) {
+    if (!(linha >= 0 && linha < 10 && coluna >= 0 && coluna < 10)) { // Cobre todo o limite do tabuleiro 10x10
       System.out.println("\nPosiçao inválida! Tente novamente números de 0 a 9:");
       return false;
     }

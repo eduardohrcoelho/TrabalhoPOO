@@ -156,7 +156,7 @@ public class Jogo {
 
   // Gerencia o loop para um jogador posicionar os 8 tesouros
   private void posicionarTesourosJogador(Jogador jogador) {
-    loopPosiciona(jogador, 3, "verde");
+    loopPosiciona(jogador, 3, "verde"); 
     loopPosiciona(jogador, 3, "amarelo");
     loopPosiciona(jogador, 2, "vermelho");
 
